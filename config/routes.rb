@@ -1,14 +1,11 @@
 Rails.application.routes.draw do
+  resources :users
+  root 'users#home'
 
-  get 'user/home'
+resources :attractions, only: [:index,:new,:create,:show,:edit,:update]
+  post '/rides/new', to: 'rides#new'
+  get '/signin', to: 'sessions#new'
+  post '/signin', to: 'sessions#create'
+  get '/signout', to: 'sessions#sign_out'
 
-root "static#home"
-
- get '/signin' => 'sessions#new'
- post '/signin' => 'sessions#create'
- get "/signout" => "sessions#destroy"
- post '/rides' => "rides#new"
-
- resources :users
- resources :attractions
 end
